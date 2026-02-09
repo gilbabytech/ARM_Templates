@@ -1,0 +1,114 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "virtualMachines_labwintest291126_name": {
+            "defaultValue": "labwintest291126",
+            "type": "String"
+        },
+        "disks_labwintest291126_OsDisk_1_061b13ef0bde4416be1939b5fc609179_externalid": {
+            "defaultValue": "/subscriptions/a55427d4-4baa-4bbe-b400-be7b391cf250/resourceGroups/labwintest291126_group/providers/Microsoft.Compute/disks/labwintest291126_OsDisk_1_061b13ef0bde4416be1939b5fc609179",
+            "type": "String"
+        },
+        "disks_labwintest291126_DataDisk_0_externalid": {
+            "defaultValue": "/subscriptions/a55427d4-4baa-4bbe-b400-be7b391cf250/resourceGroups/labwintest291126_group/providers/Microsoft.Compute/disks/labwintest291126_DataDisk_0",
+            "type": "String"
+        },
+        "networkInterfaces_labwintest291126115_externalid": {
+            "defaultValue": "/subscriptions/a55427d4-4baa-4bbe-b400-be7b391cf250/resourceGroups/labwintest291126_group/providers/Microsoft.Network/networkInterfaces/labwintest291126115",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Compute/virtualMachines",
+            "apiVersion": "2024-11-01",
+            "name": "[parameters('virtualMachines_labwintest291126_name')]",
+            "location": "northcentralus",
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D2s_v3"
+                },
+                "additionalCapabilities": {
+                    "hibernationEnabled": false
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2025-datacenter-g2",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "[concat(parameters('virtualMachines_labwintest291126_name'), '_OsDisk_1_061b13ef0bde4416be1939b5fc609179')]",
+                        "createOption": "FromImage",
+                        "caching": "ReadWrite",
+                        "managedDisk": {
+                            "storageAccountType": "Premium_LRS",
+                            "id": "[parameters('disks_labwintest291126_OsDisk_1_061b13ef0bde4416be1939b5fc609179_externalid')]"
+                        },
+                        "deleteOption": "Delete",
+                        "diskSizeGB": 127
+                    },
+                    "dataDisks": [
+                        {
+                            "lun": 0,
+                            "name": "[concat(parameters('virtualMachines_labwintest291126_name'), '_DataDisk_0')]",
+                            "createOption": "Attach",
+                            "caching": "ReadOnly",
+                            "writeAcceleratorEnabled": false,
+                            "managedDisk": {
+                                "storageAccountType": "Premium_LRS",
+                                "id": "[parameters('disks_labwintest291126_DataDisk_0_externalid')]"
+                            },
+                            "deleteOption": "Detach",
+                            "diskSizeGB": 1024,
+                            "toBeDetached": false
+                        }
+                    ],
+                    "diskControllerType": "SCSI"
+                },
+                "osProfile": {
+                    "computerName": "labwintest29112",
+                    "adminUsername": "gilbabytech",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true,
+                    "requireGuestProvisionSignal": true
+                },
+                "securityProfile": {
+                    "uefiSettings": {
+                        "secureBootEnabled": true,
+                        "vTpmEnabled": true
+                    },
+                    "securityType": "TrustedLaunch"
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[parameters('networkInterfaces_labwintest291126115_externalid')]",
+                            "properties": {
+                                "deleteOption": "Detach"
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": true
+                    }
+                }
+            }
+        }
+    ]
+}
