@@ -10,7 +10,7 @@ $rg = "$rgName"
 # Prompt the user for Deployment Name (give specific info to track)
 
 $AzDplyName = Read-Host "Enter ARM Template Deployment name (no spaces)"
-$templateFile = "C:\Users\gilba\github\ARM_Templates\Final Storage\ARMcreateStrgacnt.json" 
+$templateFile = "C:\Users\gilba\github\ARM_Templates\Final Storage\Storage\ARMcreateStrgacnt.json" 
 $location = "EastUS"
 
 # create RG
