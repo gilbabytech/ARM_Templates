@@ -1,0 +1,17 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "variables": {},
+    "resources": [
+    arm network {
+            "name": "applicationSecurityGroup1",
+            "type": "Microsoft.Network/applicationSecurityGroups",
+            "apiVersion": "2018-08-01",
+            "location": "[resourceGroup().location]",
+            "tags": {}
+        "properties": {}
+        }
+    ],
+    "outputs": {}
+}
