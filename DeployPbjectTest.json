@@ -7,6 +7,6 @@
   "outputs": {
     "stringOutput": {
       "type": "string",
-      "value": "[deployment().name]"
+      "value": "[concat(parameters('vmNamePrefix'), '-', parameters('vmNumber'))]"
     }
   }
