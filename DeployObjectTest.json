@@ -4,8 +4,9 @@
     "parameters": {
         "vmname": {
             "type": "string",
+            "defaultValue": "vm-win-lab-prd-srvr01",
             "metadata": {
-                "description": "description"
+                "description": "VM Name"
             }
         }
     },
