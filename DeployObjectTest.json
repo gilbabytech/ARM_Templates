@@ -7,10 +7,18 @@
             "defaultValue": "vm-win-lab-prd-srvr01",
             "metadata": {
                 "description": "VM Name"
-            }
-        }
-    },
-    "variables": {},
-    "resources": [],
-    "outputs": {}
-}
+            },
+            "env": {
+                "defaultValue": "prd"
+            },
+            "osDisk": {
+                "defaultValue": "osDisk"
+            },
+            "diskID": {
+                "defaultValue": "(uniqueString)"
+            },
+        },
+        "variables": {},
+        "resources": [],
+        "outputs": {}
+    }
